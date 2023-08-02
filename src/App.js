@@ -8,6 +8,7 @@ class App extends Component {
         My Hello World!
         <FirstComponent/>
         <SecondComponent/>
+        <ThirdComponent/>
       </div>
     );
   }
@@ -33,6 +34,15 @@ class SecondComponent extends Component {
       </div>
     );
   }
+}
+
+// Function as Third Component
+function ThirdComponent() {
+  return (
+    <div className="thirdComponent">
+      Third Component
+    </div>
+  );
 }
 
 export default App;
