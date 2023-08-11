@@ -4,6 +4,19 @@ import './Counter.css';
 
 // Class Counter Component
 class Counter extends Component {
+    render() {
+        return (
+          <div className="counter">
+            <CounterButton />
+            <CounterButton by={5} />
+            <CounterButton by={10} />
+          </div>
+        );
+      }
+}
+
+// Class CounterButton Component
+class CounterButton extends Component {
 
     // Definir el estado inicial en un constructor
     // state => counter 0
@@ -35,11 +48,11 @@ class Counter extends Component {
     }
 }
 
-Counter.defaultProps = {
+CounterButton.defaultProps = {
     by : 1
 }
 
-Counter.propTypes = {
+CounterButton.propTypes = {
     by : PropTypes.number
 }
 
