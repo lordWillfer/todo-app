@@ -17,10 +17,12 @@ class Counter extends Component {
     }
 
     render() {
+        const style = {fontSize: "50px", padding: "15px 30px"};
+
         return (
             <div className="counter">
                 <button onClick={this.increment}>+1</button>
-                <span className="count" style={{fontSize: "50px", padding: "15px 30px"}}>{this.state.counter}</span>
+                <span className="count" style={style}>{this.state.counter}</span>
             </div>
         );
     }
@@ -33,6 +35,5 @@ class Counter extends Component {
         });
     }
 }
-
 
 export default Counter;
