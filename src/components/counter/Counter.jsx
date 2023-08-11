@@ -10,29 +10,26 @@ class Counter extends Component {
         super();// Error 1
         
         this.state = {
-            counter: 0,
-            secondCounter: 100
+            counter: 0
         }
 
-        this.increment = this.increment.bind(this);
+        //this.increment = this.increment.bind(this);
     }
 
-    render() {
+    render = () => {
         return (
             <div className="counter">
                 <button onClick={this.increment}>+1</button>
                 <span className="count">{this.state.counter}</span>
-                <span className="count">{this.state.secondCounter}</span>
             </div>
         );
     }
 
-    increment() {
+    increment = () => {
         // Actualizar el estado - counter++
         //console.log('Increment');
         this.setState({
-            counter: this.state.counter + 1,
-            secondCounter: this.state.secondCounter + 1
+            counter: this.state.counter + 1
         });
     }
 }
