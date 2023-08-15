@@ -26,23 +26,38 @@ class LoginComponent extends Component {
         }
 
         // Enlazando métodos de eventos del componente Login
-        this.handleUsernameChange = this.handleUsernameChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        /* this.handleUsernameChange = this.handleUsernameChange.bind(this)
+        this.handlePasswordChange = this.handlePasswordChange.bind(this) */
+        this.handleChange = this.handleChange.bind(this)
     }
 
-    // Método lanzado en el evento OnChange del elemento Username
-    handleUsernameChange(event) {
-        console.log(event.target.value);
-        // Estableciendo el valor del estado del elemento username
+    // Método gnérico lanzado en el evento OnChange del elemento
+    handleChange(event) {
+        // Imprimiendo en consola los valores de todos los elementos de estado del componente Login
+        console.log(this.state);
+        // Estableciendo el valor del estado del elemento
         this.setState(
             {
-                username: event.target.value
+                // Puede establecerse [event.target.name] en lugar del elemento estado de forma dinámica
+                [event.target.name]: event.target.value
             }
         )
     }
 
+    // Método lanzado en el evento OnChange del elemento Username
+    /* handleUsernameChange(event) {
+        console.log(event.target.value);
+        // Estableciendo el valor del estado del elemento username
+        this.setState(
+            {
+                // Puede establecerse [event.target.name] en lugar de username
+                username: event.target.value
+            }
+        )
+    } */
+
     // Método lanzado en el evento OnChange del elemento Password
-    handlePasswordChange(event) {
+    /* handlePasswordChange(event) {
         console.log(event.target.value);
         // Estableciendo el valor del estado del elemento password
         this.setState(
@@ -50,14 +65,14 @@ class LoginComponent extends Component {
                 password: event.target.value
             }
         )
-    }
+    } */
 
     // Método que devuelve los elemtos renderizados del componente Login a la vista
     render() {
         return (
             <div>
-                User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleUsernameChange} />
-                Password: <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
+                User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+                Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                 <button>Login</button>
             </div>
         )
