@@ -21,20 +21,23 @@ class LoginComponent extends Component {
 
         // Establecimiento de estados de los elementos del componente Login
         this.state = {
-            username: 'lorWillfer',
-            password: ''
+            username: 'lordWillfer',
+            password: '',
+            hasLoginFailed: false,
+            showSuccessMessage: false
         }
 
         // Enlazando métodos de eventos del componente Login
         /* this.handleUsernameChange = this.handleUsernameChange.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this) */
         this.handleChange = this.handleChange.bind(this)
+        this.loginClicked = this.loginClicked.bind(this)
     }
 
     // Método gnérico lanzado en el evento OnChange del elemento
     handleChange(event) {
         // Imprimiendo en consola los valores de todos los elementos de estado del componente Login
-        console.log(this.state);
+        //console.log(this.state);
         // Estableciendo el valor del estado del elemento
         this.setState(
             {
@@ -67,16 +70,46 @@ class LoginComponent extends Component {
         )
     } */
 
+    loginClicked() {
+        // lordWillfer, pass12345
+        if (this.state.username === 'lordWillfer' && this.state.password === 'pass12345') {
+            console.log('Succesful')
+            this.setState({showSuccessMessage: true})
+            this.setState({hasLoginFailed: false})
+        } else {
+            this.setState({showSuccessMessage: false})
+            this.setState({hasLoginFailed: true})
+            console.log('Failed')
+        }
+        //console.log(this.state)
+    }
+
     // Método que devuelve los elemtos renderizados del componente Login a la vista
     render() {
         return (
             <div>
+                <ShowInvalidCredentials hasLoginFailed = {this.state.hasLoginFailed} />
+                <ShowLoginSuccessMessage showSuccessMessage = {this.state.showSuccessMessage} />
                 User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                 Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <button>Login</button>
+                <button onClick={this.loginClicked}>Login</button>
             </div>
         )
     }
+}
+
+function ShowInvalidCredentials(props) {
+    if (props.hasLoginFailed) {
+        return <div>Invalid Credentials</div>
+    }
+    return null;
+}
+
+function ShowLoginSuccessMessage(props) {
+    if (props.showSuccessMessage) {
+        return <div>Login Succesful</div>
+    }
+    return null;
 }
 
 // Definiendo el componente principal que debe renderizar a la vista
