@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import withNavigation from './WithNavigation.jsx'
+import withParams from "./withParams.jsx";
 
 // Componente TODO App Principal (Padre)
 class TodoApp extends Component {
     // Método que devuelve los elemtos renderizados del componente TodoApp a la vista
     render() {
         const LoginComponentWithNavigation = withNavigation(LoginComponent);
+        const WelcomeComponentWithParams = withParams(WelcomeComponent);
         return (
             <div className="TodoApp">
                 <Router>
                     <Routes>
                             <Route path="/" element={<LoginComponentWithNavigation />} />
                             <Route path="/login" element={<LoginComponentWithNavigation />} />
-                            <Route path="/welcome" element={<WelcomeComponent />} />
+                            <Route path="/welcome/:name" element={<WelcomeComponentWithParams />} />
+                            <Route path="/todos" element={<ListTodosComponent />} />
                             <Route path="*" element={<ErrorComponent />} />
                     </Routes>
                 </Router>
@@ -22,10 +25,51 @@ class TodoApp extends Component {
     }
 }
 
+class ListTodosComponent extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            todos:
+                [
+                    { id: 1, description: 'Learn Angular' },
+                    { id: 2, description: 'Learn React' },
+                    { id: 3, description: 'Learn Spring Boot' }
+                ]
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>List TODOs</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.todos.map(
+                                todo =>
+                                    <tr key={todo.id}>
+                                        <td>{todo.id}</td>
+                                        <td>{todo.description}</td>
+                                    </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+}
+
 // Componente Welcome
 class WelcomeComponent extends Component {
     render() {
-        return <div>Welcome to TODOApp</div>
+        return <div>Welcome {this.props.params.name}</div>
     }
 }
 
@@ -95,7 +139,7 @@ class LoginComponent extends Component {
         // lordWillfer, pass12345
         if (this.state.username === 'lordWillfer' && this.state.password === 'pass12345') {
             //console.log('Succesful')
-            this.props.navigate("/welcome")
+            this.props.navigate(`/welcome/${this.state.username}`)
             //this.setState({showSuccessMessage: true})
             //this.setState({hasLoginFailed: false})
         } else {
