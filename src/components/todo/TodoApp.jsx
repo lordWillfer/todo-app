@@ -88,29 +88,29 @@ class ListTodosComponent extends Component {
         return (
             <div>
                 <h1>List TODOs</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Description</th>
-                            <th>Target Date</th>
-                            <th>Is Completed?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.todos.map(
-                                todo =>
-                                    <tr key={todo.id}>
-                                        <td>{todo.id}</td>
-                                        <td>{todo.description}</td>
-                                        <td>{todo.targetDate.toString()}</td>
-                                        <td>{todo.done.toString()}</td>
-                                    </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+                <div className="container">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Target Date</th>
+                                <th>Is Completed?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.todos.map(
+                                    todo =>
+                                        <tr key={todo.id}>
+                                            <td>{todo.description}</td>
+                                            <td>{todo.targetDate.toString()}</td>
+                                            <td>{todo.done.toString()}</td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }
@@ -119,9 +119,14 @@ class ListTodosComponent extends Component {
 // Componente Welcome
 class WelcomeComponent extends Component {
     render() {
-        return <div>
-            Welcome {this.props.params.name}. You can manage your TODOs <Link to="/todos">here</Link>.
-        </div>
+        return (
+            <div>
+                <h1>Welcome!</h1>
+                <div className="container">
+                Welcome {this.props.params.name}. You can manage your TODOs <Link to="/todos">here</Link>.
+                </div>
+            </div>
+        )
     }
 }
 
@@ -206,13 +211,30 @@ class LoginComponent extends Component {
     render() {
         return (
             <div>
-                {/* <ShowInvalidCredentials hasLoginFailed = {this.state.hasLoginFailed} />
+                <h1>Login</h1>
+                <div className="container">
+                    {/* <ShowInvalidCredentials hasLoginFailed = {this.state.hasLoginFailed} />
                 <ShowLoginSuccessMessage showSuccessMessage = {this.state.showSuccessMessage} /> */}
-                {this.state.hasLoginFailed && <div>Invalid Credentials</div>}
-                {this.state.showSuccessMessage && <div>Login Succesful</div>}
-                User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-                Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <button onClick={this.loginClicked}>Login</button>
+                    <div id="login-row" class="row justify-content-center align-items-center">
+                        <div id="login-column" class="col-md-6">
+                            <div id="login-box" class="col-md-12">
+                                {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
+                                {this.state.showSuccessMessage && <div>Login Succesful</div>}
+                                <div className="form-group">
+                                    <label className="text-info" for="fc1">User Name</label>
+                                    <input className="form-control" id="fc1" type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-info" for="fc2">Password</label>
+                                    <input className="form-control" id="fc2" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                                </div>
+                                <div className="form-group">
+                                    <button className="btn btn-info btn-md" onClick={this.loginClicked}>Login</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
