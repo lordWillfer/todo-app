@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import withNavigation from './WithNavigation.jsx'
 
 // Componente TODO App Principal (Padre)
 class TodoApp extends Component {
     // Método que devuelve los elemtos renderizados del componente TodoApp a la vista
     render() {
+        const LoginComponentWithNavigation = withNavigation(LoginComponent);
         return (
             <div className="TodoApp">
                 <Router>
                     <Routes>
-                        <Route path="/" element={<LoginComponent />} />
-                        <Route path="/login" element={<LoginComponent />} />
+                        <Route path="/" element={<LoginComponentWithNavigation />} />
+                        <Route path="/login" element={<LoginComponentWithNavigation />} />
                         <Route path="/welcome" element={<WelcomeComponent />} />
                     </Routes>
                 </Router>
@@ -87,13 +89,14 @@ class LoginComponent extends Component {
     loginClicked() {
         // lordWillfer, pass12345
         if (this.state.username === 'lordWillfer' && this.state.password === 'pass12345') {
-            console.log('Succesful')
-            this.setState({showSuccessMessage: true})
-            this.setState({hasLoginFailed: false})
+            //console.log('Succesful')
+            this.props.navigate("/welcome")
+            //this.setState({showSuccessMessage: true})
+            //this.setState({hasLoginFailed: false})
         } else {
             this.setState({showSuccessMessage: false})
             this.setState({hasLoginFailed: true})
-            console.log('Failed')
+            //console.log('Failed')
         }
         //console.log(this.state)
     }
