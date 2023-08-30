@@ -19,6 +19,7 @@ class TodoApp extends Component {
                             <Route path="/welcome/:name" element={<WelcomeComponentWithParams />} />
                             <Route path="/todos" element={<ListTodosComponent />} />
                             <Route path="*" element={<ErrorComponent />} />
+                            <Route path="/logout" element={<LogoutComponent />} />
                     </Routes>
                     <FooterComponent />
                 </Router>
@@ -32,7 +33,7 @@ class HeaderComponent extends Component {
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><a href="/welcome" className="navbar-brand">My TODO Application</a></div>
+                    <div><a href="/welcome/lordWillfer" className="navbar-brand">My TODO Application</a></div>
                     <ul className="navbar-nav">
                         <li><Link className="nav-link" to="/welcome/lordWillfer">Home</Link></li>
                         <li><Link className="nav-link" to="/todos">Todos</Link></li>
@@ -50,8 +51,21 @@ class HeaderComponent extends Component {
 class FooterComponent extends Component {
     render() {
         return (
+            <footer className="footer">
+                <span className="text-white">All Rights Reserved 2023 @lordWillfer</span>
+            </footer>
+        )
+    }
+}
+
+class LogoutComponent extends Component {
+    render() {
+        return (
             <div>
-                <hr />Footer
+                <h1>You are logged out</h1>
+                <div className="container">
+                    Thank You For Using Our Application.
+                </div>
             </div>
         )
     }
