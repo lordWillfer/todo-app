@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import withNavigation from './WithNavigation.jsx'
 import withParams from "./withParams.jsx";
 
@@ -31,9 +31,9 @@ class ListTodosComponent extends Component {
         this.state = {
             todos:
                 [
-                    { id: 1, description: 'Learn Angular' },
-                    { id: 2, description: 'Learn React' },
-                    { id: 3, description: 'Learn Spring Boot' }
+                    { id: 1, description: 'Learn Angular', done: false, targetDate: new Date() },
+                    { id: 2, description: 'Learn React', done: false, targetDate: new Date() },
+                    { id: 3, description: 'Learn Spring Boot', done: false, targetDate: new Date() }
                 ]
         }
     }
@@ -45,8 +45,10 @@ class ListTodosComponent extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>description</th>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Target Date</th>
+                            <th>Is Completed?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +58,8 @@ class ListTodosComponent extends Component {
                                     <tr key={todo.id}>
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
+                                        <td>{todo.targetDate.toString()}</td>
+                                        <td>{todo.done.toString()}</td>
                                     </tr>
                             )
                         }
@@ -70,7 +74,7 @@ class ListTodosComponent extends Component {
 class WelcomeComponent extends Component {
     render() {
         return <div>
-            Welcome {this.props.params.name}. You can manage your TODOs <a href="/todos">here</a>.
+            Welcome {this.props.params.name}. You can manage your TODOs <Link to="/todos">here</Link>.
         </div>
     }
 }
