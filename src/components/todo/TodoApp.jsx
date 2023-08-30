@@ -11,9 +11,10 @@ class TodoApp extends Component {
             <div className="TodoApp">
                 <Router>
                     <Routes>
-                        <Route path="/" element={<LoginComponentWithNavigation />} />
-                        <Route path="/login" element={<LoginComponentWithNavigation />} />
-                        <Route path="/welcome" element={<WelcomeComponent />} />
+                            <Route path="/" element={<LoginComponentWithNavigation />} />
+                            <Route path="/login" element={<LoginComponentWithNavigation />} />
+                            <Route path="/welcome" element={<WelcomeComponent />} />
+                            <Route path="*" element={<ErrorComponent />} />
                     </Routes>
                 </Router>
             </div>
@@ -26,6 +27,10 @@ class WelcomeComponent extends Component {
     render() {
         return <div>Welcome to TODOApp</div>
     }
+}
+
+function ErrorComponent() {
+    return <div>An Error Occurred. I don't know what to do! Contact support at 1234-5678-9012</div>
 }
 
 // Componente Login Secundario (Hijo)
