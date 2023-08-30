@@ -69,7 +69,9 @@ class ListTodosComponent extends Component {
 // Componente Welcome
 class WelcomeComponent extends Component {
     render() {
-        return <div>Welcome {this.props.params.name}</div>
+        return <div>
+            Welcome {this.props.params.name}. You can manage your TODOs <a href="/todos">here</a>.
+        </div>
     }
 }
 
