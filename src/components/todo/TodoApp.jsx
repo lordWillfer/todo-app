@@ -1,14 +1,28 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 // Componente TODO App Principal (Padre)
 class TodoApp extends Component {
     // Método que devuelve los elemtos renderizados del componente TodoApp a la vista
     render() {
         return (
-            <div>
-                <LoginComponent />
+            <div className="TodoApp">
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<LoginComponent />} />
+                        <Route path="/login" element={<LoginComponent />} />
+                        <Route path="/welcome" element={<WelcomeComponent />} />
+                    </Routes>
+                </Router>
             </div>
         )
+    }
+}
+
+// Componente Welcome
+class WelcomeComponent extends Component {
+    render() {
+        return <div>Welcome to TODOApp</div>
     }
 }
 
