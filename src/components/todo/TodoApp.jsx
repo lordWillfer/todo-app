@@ -10,10 +10,12 @@ class TodoApp extends Component {
     render() {
         const LoginComponentWithNavigation = withNavigation(LoginComponent);
         const WelcomeComponentWithParams = withParams(WelcomeComponent);
+        const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
+
         return (
             <div className="TodoApp">
                 <Router>
-                    <HeaderComponent />
+                    <HeaderComponentWithNavigation />
                     <Routes>
                             <Route path="/" element={<LoginComponentWithNavigation />} />
                             <Route path="/login" element={<LoginComponentWithNavigation />} />
@@ -31,17 +33,20 @@ class TodoApp extends Component {
 
 class HeaderComponent extends Component {
     render() {
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        console.log(isUserLoggedIn);
+
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div><a href="/welcome/lordWillfer" className="navbar-brand">My TODO Application</a></div>
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/welcome/lordWillfer">Home</Link></li>
-                        <li><Link className="nav-link" to="/todos">Todos</Link></li>
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/lordWillfer">Home</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
-                        <li><Link className="nav-link" to="/login">Login</Link></li>
-                        <li><Link className="nav-link" to="/logout">Logout</Link></li>
+                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
                     </ul>
                 </nav>
             </header>
@@ -217,17 +222,17 @@ class LoginComponent extends Component {
                 <div className="container">
                     {/* <ShowInvalidCredentials hasLoginFailed = {this.state.hasLoginFailed} />
                 <ShowLoginSuccessMessage showSuccessMessage = {this.state.showSuccessMessage} /> */}
-                    <div id="login-row" class="row justify-content-center align-items-center">
-                        <div id="login-column" class="col-md-6">
-                            <div id="login-box" class="col-md-12">
+                    <div id="login-row" className="row justify-content-center align-items-center">
+                        <div id="login-column" className="col-md-6">
+                            <div id="login-box" className="col-md-12">
                                 {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                                 {this.state.showSuccessMessage && <div>Login Succesful</div>}
                                 <div className="form-group">
-                                    <label className="text-info" for="fc1">User Name</label>
+                                    <label className="text-info" htmlFor="fc1">User Name</label>
                                     <input className="form-control" id="fc1" type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
-                                    <label className="text-info" for="fc2">Password</label>
+                                    <label className="text-info" htmlFor="fc2">Password</label>
                                     <input className="form-control" id="fc2" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
