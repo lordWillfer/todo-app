@@ -57,8 +57,8 @@ class HeaderComponent extends Component {
 class FooterComponent extends Component {
     render() {
         return (
-            <footer className="footer">
-                <span className="text-white">All Rights Reserved 2023 @lordWillfer</span>
+            <footer className="border-top footer text-secondary">
+                <div className="container">All Rights Reserved 2023 @lordWillfer</div>
             </footer>
         )
     }
