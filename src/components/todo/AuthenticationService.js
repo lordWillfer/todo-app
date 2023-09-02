@@ -1,6 +1,5 @@
 class AuthenticationService {
     registerSuccessfulLogin(username, password) {
-        console.log('registerSuccessfulLogin');
         sessionStorage.setItem('authenticatedUser', username)
     }
 
@@ -16,4 +15,6 @@ class AuthenticationService {
     }
 }
 
-export default new AuthenticationService()
+const authenticationService = new AuthenticationService()
+
+export default authenticationService
