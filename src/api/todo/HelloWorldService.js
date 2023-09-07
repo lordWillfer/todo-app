@@ -5,6 +5,11 @@ class HelloWorldService {
         console.log("Executed Service")
         return axios.get("http://localhost:8080/hello-world")
     }
+
+    executeHelloWorldBeanService() {
+        console.log("Executed Service")
+        return axios.get("http://localhost:8080/hello-world-bean")
+    }
 }
 
 const helloWorldService = new HelloWorldService()
