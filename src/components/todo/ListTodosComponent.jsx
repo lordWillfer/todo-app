@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import TodoDataService from "../../api/todo/TodoDataService.js";
+import AuthenticationService from "./AuthenticationService.js"
 
 class ListTodosComponent extends Component {
     constructor(props) {
@@ -6,11 +8,22 @@ class ListTodosComponent extends Component {
         this.state = {
             todos:
                 [
-                    { id: 1, description: 'Learn Angular', done: false, targetDate: new Date() },
-                    { id: 2, description: 'Learn React', done: false, targetDate: new Date() },
-                    { id: 3, description: 'Learn Spring Boot', done: false, targetDate: new Date() }
+
                 ]
         }
+    }
+
+    // componentDidMount() se invoca inmediatamente después de montar un componente (insertarlo en el árbol). 
+    // La inicialización que requiere nodos DOM debe ir aquí. Si necesita cargar datos desde un punto final remoto, 
+    // este es un buen lugar para crear una instancia de la solicitud de red.
+    componentDidMount() {
+        let username = AuthenticationService.getLoggedInUserName()
+        TodoDataService.retrieveAllTodos(username)
+            .then(
+                response => {
+                    this.setState({ todos: response.data })
+                }
+            )
     }
 
     render() {
