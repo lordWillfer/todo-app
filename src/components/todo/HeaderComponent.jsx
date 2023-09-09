@@ -9,7 +9,7 @@ class HeaderComponent extends Component {
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><a href="/welcome/lordWillfer" className="navbar-brand">My TODO Application</a></div>
+                    <div><a href="/welcome/lordWillfer" className="navbar-brand"><img style={{width: "15%"}} src="/MyTODOApp.png" alt="MyTODOApp" />My TODO Application</a></div>
                     <ul className="navbar-nav">
                         {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/lordWillfer">Home</Link></li>}
                         {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
