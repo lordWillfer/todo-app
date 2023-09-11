@@ -15,6 +15,7 @@ class ListTodosComponent extends Component {
         this.refreshTodos = this.refreshTodos.bind(this)
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
         this.updateTodoClicked = this.updateTodoClicked.bind(this)
+        this.addTodoClicked = this.addTodoClicked.bind(this)
     }
 
     // componentDidMount() se invoca inmediatamente después de montar un componente (insertarlo en el árbol). 
@@ -49,6 +50,10 @@ class ListTodosComponent extends Component {
 
     updateTodoClicked(id) {
         this.props.navigate(`/todos/${id}`)
+    }
+
+    addTodoClicked() {
+        this.props.navigate('/todos/-1')
     }
 
     componentWillUnmount() {
@@ -95,6 +100,9 @@ class ListTodosComponent extends Component {
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success btn-sm" onClick={this.addTodoClicked}>Add</button>
+                    </div>
                 </div>
             </div>
         )
