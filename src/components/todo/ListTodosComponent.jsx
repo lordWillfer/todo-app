@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoDataService from "../../api/todo/TodoDataService.js";
 import AuthenticationService from "./AuthenticationService.js"
+import moment from 'moment'
 
 class ListTodosComponent extends Component {
     constructor(props) {
@@ -48,14 +49,6 @@ class ListTodosComponent extends Component {
 
     updateTodoClicked(id) {
         this.props.navigate(`/todos/${id}`)
-        /* let username = AuthenticationService.getLoggedInUserName()
-        TodoDataService.updateTodo(username, id)
-        .then(
-            response => {
-                this.setState({message: `Delete of todo ${id} Successful`})
-                this.refreshTodos()
-            }
-        ) */
     }
 
     componentWillUnmount() {
@@ -91,7 +84,7 @@ class ListTodosComponent extends Component {
                                     todo =>
                                         <tr key={todo.id}>
                                             <td>{todo.description}</td>
-                                            <td>{todo.targetDate.toString()}</td>
+                                            <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                                             <td>{todo.done.toString()}</td>
                                             <td>
                                                 <button className="btn btn-warning btn-sm" onClick={() => this.updateTodoClicked(todo.id)}>Update</button>&nbsp;
