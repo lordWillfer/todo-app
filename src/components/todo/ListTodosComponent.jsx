@@ -5,7 +5,6 @@ import moment from 'moment'
 
 class ListTodosComponent extends Component {
     constructor(props) {
-        console.log('constructor')
         super(props)
         this.state = {
             todos: [],
@@ -22,9 +21,7 @@ class ListTodosComponent extends Component {
     // La inicialización que requiere nodos DOM debe ir aquí. Si necesita cargar datos desde un punto final remoto, 
     // este es un buen lugar para crear una instancia de la solicitud de red.
     componentDidMount() {
-        console.log('componentDidMount')
         this.refreshTodos()
-        console.log(this.state)
     }
 
     refreshTodos() {
@@ -57,18 +54,14 @@ class ListTodosComponent extends Component {
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount')
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('shouldComponentUpdate')
-        console.log(nextProps)
-        console.log(nextState)
         return true
     }
 
     render() {
-        console.log('render')
         return (
             <div>
                 <h1>List TODOs</h1>

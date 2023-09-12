@@ -57,8 +57,6 @@ class TodoComponent extends Component {
         } else {
             TodoDataService.updateTodo(username, this.state.id, todo).then(() => { this.props.navigate('/todos') })
         }
-
-        console.log(values)
     }
 
     render() {
