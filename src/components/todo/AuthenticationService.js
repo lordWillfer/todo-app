@@ -2,8 +2,10 @@ import axios from "axios"
 
 class AuthenticationService {
     registerSuccessfulLogin(username, password) {
+        let basciAuthHeader = 'Basic ' + window.btoa(`${username}:${password}`)
+
         sessionStorage.setItem('authenticatedUser', username)
-        this.setupAxiosInterceptors()
+        this.setupAxiosInterceptors(basciAuthHeader)
     }
 
     logout() {
@@ -24,11 +26,7 @@ class AuthenticationService {
         return user
     }
 
-    setupAxiosInterceptors() {
-        let username = 'lordWillfer'
-        let password = 'pass12345'
-        let basciAuthHeader = 'Basic ' + window.btoa(`${username}:${password}`)
-
+    setupAxiosInterceptors(basciAuthHeader) {
         axios.interceptors.request.use(
             (config) => {
                 if (this.isUserLoggedIn())
