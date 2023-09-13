@@ -34,13 +34,15 @@ class LoginComponent extends Component {
 
     loginClicked() {
         // lordWillfer, pass12345
-        if (this.state.username === 'lordWillfer' && this.state.password === 'pass12345') {
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-            this.props.navigate(`/welcome/${this.state.username}`)
-        } else {
-            this.setState({ showSuccessMessage: false })
-            this.setState({ hasLoginFailed: true })
-        }
+        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+            .then(() => {
+                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
+                this.props.navigate(`/welcome/${this.state.username}`)
+            })
+            .catch(() => {
+                this.setState({ showSuccessMessage: false })
+                this.setState({ hasLoginFailed: true })
+            })
     }
 
     // Método que devuelve los elemtos renderizados del componente Login a la vista
