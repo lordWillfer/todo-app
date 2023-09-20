@@ -1,16 +1,17 @@
 import axios from "axios"
+import {API_URL} from "../../Constants.js"
 
 class HelloWorldService {
     executeHelloWorldService() {
-        return axios.get("http://localhost:8080/hello-world")
+        return axios.get(`${API_URL}/hello-world`)
     }
 
     executeHelloWorldBeanService() {
-        return axios.get("http://localhost:8080/hello-world-bean")
+        return axios.get(`${API_URL}/hello-world-bean`)
     }
 
     executeHelloWorldPathVariableService(name) {
-        return axios.get(`http://localhost:8080/hello-world-bean/path-variable/${name}`)
+        return axios.get(`${API_URL}/hello-world-bean/path-variable/${name}`)
     }
 }
 
