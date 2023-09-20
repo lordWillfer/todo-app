@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import moment from 'moment'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
-import TodoDataService from '../../api/todo/TodoDataService'
-import AuthenticationService from './AuthenticationService'
+import React, { Component } from "react"
+import moment from "moment"
+import { ErrorMessage, Field, Form, Formik } from "formik"
+import TodoDataService from "../../api/todo/TodoDataService"
+import AuthenticationService from "./AuthenticationService.js"
 
 class TodoComponent extends Component {
 
@@ -23,7 +23,7 @@ class TodoComponent extends Component {
         if (this.state.id === -1)
             return
 
-        let username = AuthenticationService.getLoggedInUserName
+        let username = AuthenticationService.getLoggedInUserName()
         TodoDataService.retrieveTodo(username, this.state.id)
         .then(response => this.setState({
             description: response.data.description,
@@ -45,7 +45,7 @@ class TodoComponent extends Component {
     }
 
     onSubmit(values) {
-        let username = AuthenticationService.getLoggedInUserName
+        let username = AuthenticationService.getLoggedInUserName()
         let todo = {
             id: this.state.id,
             description: values.description,
