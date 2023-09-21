@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import moment from "moment"
 import { ErrorMessage, Field, Form, Formik } from "formik"
-import TodoDataService from "../../api/todo/TodoDataService"
+import TodoDataService from "../../api/todo/TodoDataService.js"
 import AuthenticationService from "./AuthenticationService.js"
 
 class TodoComponent extends Component {
@@ -20,7 +20,7 @@ class TodoComponent extends Component {
     }
 
     componentDidMount() {
-        if (this.state.id === -1)
+        if (this.state.id === "-1")
             return
 
         let username = AuthenticationService.getLoggedInUserName()
@@ -52,8 +52,8 @@ class TodoComponent extends Component {
             targetDate: values.targetDate
         }
 
-        if (this.state.id === -1) {
-            TodoDataService.updateTodo(username, todo).then(() => { this.props.navigate('/todos') })
+        if (this.state.id === "-1") {
+            TodoDataService.createTodo(username, todo).then(() => { this.props.navigate('/todos') })
         } else {
             TodoDataService.updateTodo(username, this.state.id, todo).then(() => { this.props.navigate('/todos') })
         }
